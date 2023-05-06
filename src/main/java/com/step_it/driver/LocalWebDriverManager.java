@@ -8,6 +8,7 @@ import org.openqa.selenium.support.events.EventFiringWebDriver;
 import java.util.concurrent.TimeUnit;
 
 public class LocalWebDriverManager {
+
     private static WebDriver driver;
 
     public static WebDriver getDriver() {
@@ -15,7 +16,7 @@ public class LocalWebDriverManager {
         return driver;
     }
 
-    private static void startDriver() {
+    public static void startDriver() {
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);

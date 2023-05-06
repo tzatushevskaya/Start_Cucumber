@@ -3,8 +3,6 @@ package com.step_it.pages;
 import com.step_it.driver.LocalWebDriverManager;
 import com.step_it.utils.PageLoader;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
-import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 

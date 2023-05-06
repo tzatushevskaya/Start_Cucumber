@@ -8,7 +8,6 @@ public class LoginPage extends BasePage {
     @FindBy(css = ".login_logo")
     private WebElement logo;
 
-
     @FindBy(css = "#user-name")
     private WebElement usernameInput;
 

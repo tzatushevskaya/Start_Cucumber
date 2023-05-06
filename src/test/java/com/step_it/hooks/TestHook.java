@@ -1,13 +1,15 @@
 package com.step_it.hooks;
 
 import com.step_it.utils.PropertyReader;
-import io.cucumber.java.*;
+import io.cucumber.java.After;
+import io.cucumber.java.AfterStep;
+import io.cucumber.java.Before;
+import io.cucumber.java.Scenario;
 import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 
-import static com.step_it.driver.LocalWebDriverManager.getDriver;
-import static com.step_it.driver.LocalWebDriverManager.quitDriver;
+import static com.step_it.driver.LocalWebDriverManager.*;
 
 @Slf4j
 public class TestHook {
@@ -15,6 +17,7 @@ public class TestHook {
     @Before(value = "@Start")
     public void startBrowser(){
         log.info("Opening the application login page");
+        startDriver();
         getDriver().get(PropertyReader.getConfigProperty("url"));
     }
 
@@ -25,14 +28,24 @@ public class TestHook {
     }
 
     @AfterStep
-    public void afterStep(Scenario scenario){
-        if (scenario.isFailed()){
-            byte[] screenshot = ((TakesScreenshot)getDriver()).getScreenshotAs(OutputType.BYTES);
-            scenario.attach(screenshot, "image/png", "failed");
+    public void addScreenshot(Scenario scenario){
+
+        if(scenario.isFailed()) {
+            final byte[] screenshot = ((TakesScreenshot) getDriver()).getScreenshotAs(OutputType.BYTES);
+            scenario.attach(screenshot, "image/png", "image");
         }
+
     }
 
-    @After()
+//    @AfterStep
+//    public void addScreenshot(Scenario scenario){
+//
+//        final byte[] screenshot = ((TakesScreenshot) getDriver()).getScreenshotAs(OutputType.BYTES);
+//        scenario.attach(screenshot, "image/png", "image");
+//
+//    }
+
+    @After(order = 1)
     public void afterScenario(Scenario scenario){
         log.info("Finished scenario: {}", scenario.getName());
     }

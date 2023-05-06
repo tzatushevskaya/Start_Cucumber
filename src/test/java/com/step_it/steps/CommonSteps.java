@@ -23,4 +23,20 @@ public class CommonSteps {
         log.info("Check user is logged in");
         assertThat(mainPage.isTitleDisplayed()).as("The title is not displayed").isTrue();
     }
+
+    public void checkCartIsEmpty() {
+        log.info("Check cart is empty");
+        checkCartCounter(0, "The cart is not empty");
+    }
+
+    public void checkCartCounterUpdated(int counter) {
+        log.info("Check cart counter got updated");
+        checkCartCounter(counter, "The counter was not updated");
+    }
+
+    private void checkCartCounter(int counter, String assertionMessage) {
+        assertThat(mainPage.getProductCountInCart()).as(assertionMessage).isEqualTo(counter);
+    }
+
+
 }
