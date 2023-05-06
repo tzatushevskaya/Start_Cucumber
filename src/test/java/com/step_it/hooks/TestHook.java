@@ -29,21 +29,11 @@ public class TestHook {
 
     @AfterStep
     public void addScreenshot(Scenario scenario){
-
         if(scenario.isFailed()) {
             final byte[] screenshot = ((TakesScreenshot) getDriver()).getScreenshotAs(OutputType.BYTES);
             scenario.attach(screenshot, "image/png", "image");
         }
-
     }
-
-//    @AfterStep
-//    public void addScreenshot(Scenario scenario){
-//
-//        final byte[] screenshot = ((TakesScreenshot) getDriver()).getScreenshotAs(OutputType.BYTES);
-//        scenario.attach(screenshot, "image/png", "image");
-//
-//    }
 
     @After(order = 1)
     public void afterScenario(Scenario scenario){
